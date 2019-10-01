@@ -6,6 +6,16 @@ let gameBoard = [
     [0, 0, 0]
 ]
 
+let xPlayerTurn = true;
+
+function playerMove(gameBoard, token, r, c) {
+    gameBoard[r][c] = token
+    console.log(gameBoard);
+    return gameBoard
+}
+
+
+
 function checkLine(line, token) {
     let tokenCounter = 0;
     for (let i = 0; i < line.length; i++) {
@@ -54,7 +64,7 @@ function checkWin(gameBoard, token) {
     if (diagWin2) {
         return true
     }
-
+    return false
 }
 
 function communicateToUser() {
@@ -64,4 +74,6 @@ function communicateToUser() {
     // its not over
 }
 
-module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine }
+
+
+// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
