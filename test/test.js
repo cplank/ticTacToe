@@ -61,3 +61,60 @@ describe('checkLine', function () {
         assert.deepEqual(topRow, false)
     })
 });
+
+describe('checkWin', function () {
+    let x = 'x';
+    let o = "o";
+    it("returns true becuase the top row has three O's", function () {
+        let gameBoard = [[o, o, o], [o, x, o], [o, x, o]];
+        let checkWin = logic.checkWin(gameBoard, o)
+        assert.deepEqual(checkWin, true)
+    })
+    it("returns true becuase the middle col has three X's", function () {
+        let gameBoard = [[o, x, o], [o, x, o], [o, x, o]];
+        let checkWin = logic.checkWin(gameBoard, x)
+        assert.deepEqual(checkWin, true)
+    })
+    it("returns true becuase the left diag has three X's", function () {
+        let gameBoard = [[x, x, o], [o, x, o], [o, o, x]];
+        let checkWin = logic.checkWin(gameBoard, x)
+        assert.deepEqual(checkWin, true)
+    })
+    it("returns true becuase the lower diag has three O's", function () {
+        let gameBoard = [[o, o, x], [x, o, x], [o, x, o]];
+        let checkWin = logic.checkWin(gameBoard, o)
+        assert.deepEqual(checkWin, true)
+    })
+    it("returns FALSE there is no winner", function () {
+        let gameBoard = [[0, o, x], [0, o, x], [o, 0, o]];
+        let checkWin = logic.checkWin(gameBoard, o) && logic.checkWin(gameBoard, x)
+        assert.deepEqual(checkWin, false)
+    })
+
+})
+
+describe('playerMove', function () {
+    let x = "x"
+    let o = "o"
+    let gameBoard = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
+    this.beforeEach(function () {
+        gameBoard = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]
+    })
+
+    it("mutates gameBoard so [1][1] equals x instead of 0", function () {
+        let expectedGameBoard = [[0, 0, 0], [0, x, 0], [0, 0, 0]]
+        assert.deepEqual(logic.playerMove(gameBoard, x, 1, 1), expectedGameBoard)
+    })
+    it("mutates gameBoard so [2][2] equals o instead of 0", function () {
+        let expectedGameBoard = [[0, 0, 0], [0, 0, 0], [0, 0, o]]
+        assert.deepEqual(logic.playerMove(gameBoard, o, 2, 2), expectedGameBoard)
+    })
+})
