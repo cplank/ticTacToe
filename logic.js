@@ -11,6 +11,7 @@ let xPlayerTurn = true;
 function playerMove(gameBoard, token, r, c) {
     gameBoard[r][c] = token
     console.log(gameBoard);
+    gameBoard = checkLine;
     return gameBoard
 }
 
