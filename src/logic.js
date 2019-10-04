@@ -1,23 +1,21 @@
 //Making the game board. Zeroes denote an empty space.
-//@ts-check
-let gameBoard = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
-]
+// let gameBoard = [
+//     [0, 0, 0],
+//     [0, 0, 0],
+//     [0, 0, 0]
+// ]
 
-let xPlayerTurn = true;
+// let xPlayerTurn = true;
 
-function playerMove(gameBoard, token, r, c) {
+export function playerMove(gameBoard, token, r, c) {
     gameBoard[r][c] = token
     console.log(gameBoard);
-    gameBoard = checkLine;
     return gameBoard
 }
 
 
 
-function checkLine(line, token) {
+export function checkLine(line, token) {
     let tokenCounter = 0;
     for (let i = 0; i < line.length; i++) {
         if (line[i] === token) {
