@@ -136,3 +136,5 @@ Enthusiastic developer with a background in fundraising and communications. Curr
 
 ## Lessons learned
 This was my first attempt at test driven development! Mocha was easy to pick up but I found reframing my thinking towards TDD a bit more challenging. It was a great exercise to think about the tests first - what are they testing, what are the expected outcomes - and write the functions in accordance. Like many things on the first go, I didn't quite nail it (which is why there are outstanding functions in the roadmap section), but I definitely learned a lot that I'll be able to apply to future projects.
+
+Honestly, by far the most challenging part of this little project was figuring out how to deploy my React app to GitHub pages! I eventually admitted defeat and deployed to Heroku. 
