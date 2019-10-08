@@ -35,6 +35,7 @@ npm install
 ```
 
 ## Running tests
+First, ensure module.exports is **not** commented out at the end of logic.js
 
 Each function in this tic-tac-toe game has a unit test associated with it. I used Mocha.js, first without any UI, then later adapted to work with React.
 
