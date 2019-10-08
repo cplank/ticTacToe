@@ -1,68 +1,138 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mocha Testing Tic-Tac-Toe
 
-## Available Scripts
+Simple tic-tac-toe game to learn Mocha.js. This app is **in development**.
 
-In the project directory, you can run:
+## Current Progress
+* Game logic is complete
+* All functions pass unit testing
+* Intial UI work
 
-### `npm start`
+## Roadmap
+* Complete UI (chocolate bars for X's and coffee beans for O's...because this was an exercise to learn ***Mocha*** :laughing: )
+* Functions to handle communication with user
+    * Player turn
+    * Player victory
+    * Tied game
+    * Invalid move
+* Function to restart game after game end
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Getting started with this tic-tac-toe game is easy! Just clone the repo...
 
-### `npm test`
+```
+git clone https://github.com/cplank/ticTacToe.git 
+```
+...and install dependencies:
+* React
+* Mocha.js
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Additionally, this project uses React-Bootstrap for styling.
 
-### `npm run build`
+```
+cd [Repository-Directory]
+npm install 
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running tests
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Each function in this tic-tac-toe game has a unit test associated with it. I used Mocha.js, first without any UI, then later adapted to work with React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run the tests:
+>npm test
 
-### `npm run eject`
+### Test breakdown
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This tic-tac-toe game is broken into (at this time) **six** basic functions.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+makeColumns returns the gameboard's columns
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+describe('makeColumns', function () {
+    let x = 'x';
+    let o = "o";
+    let scenario = [[o, x, o], [o, x, o], [o, x, o]];
+    it('gets the middle column', function () {
+        let midcol = logic.makeColumns(scenario, 1)
+        assert.deepEqual(midcol, [x, x, x])
+    });
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+getDiagonal1 and getDiagonal2 returns each diagonal of the gameboard
 
-## Learn More
+```
+describe('getDiagonal1', function () {
+    let x = 'x';
+    let o = "o";
+    let gameboard = [[o, x, o], [o, x, o], [o, x, o]];
+    it('gets top left to bottom right diagonal', function () {
+        let diagonal = logic.getDiagonal1(gameboard)
+        console.log("wtf", diagonal)
+        assert.deepEqual(diagonal, [o, x, o])
+    })
+});
+```
+checkLine returns **true** if there are three tokens in any 'line' (column, row, or diagonal)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+describe('checkLine', function () {
+    let x = 'x';
+    let o = "o";
+    let gameboard = [[o, o, o], [o, x, o], [o, x, o]];
+    it('confirms top row is all o\'s', function () {
+        let topRow = logic.checkLine(gameboard[0], o)
+        console.log("wtf LINES", topRow)
+        assert.deepEqual(topRow, true)
+    })
+```
+checkWin runs checkLine on each line in the game
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+describe('checkWin', function () {
+    let x = 'x';
+    let o = "o";
+    it("returns true becuase the top row has three O's", function () {
+        let gameBoard = [[o, o, o], [o, x, o], [o, x, o]];
+        let checkWin = logic.checkWin(gameBoard, o)
+        assert.deepEqual(checkWin, true)
+    })
+```
+playerMove alters the gameboard
 
-### Code Splitting
+```
+describe('playerMove', function () {
+    let x = "x"
+    let o = "o"
+    let gameBoard = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
+    this.beforeEach(function () {
+        gameBoard = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]
+    })
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    it("mutates gameBoard so [1][1] equals x instead of 0", function () {
+        let expectedGameBoard = [[0, 0, 0], [0, x, 0], [0, 0, 0]]
+        assert.deepEqual(logic.playerMove(gameBoard, x, 1, 1), expectedGameBoard)
+    })
+```
 
-### Analyzing the Bundle Size
+## Built With
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+* [React](https://reactjs.org/docs/create-a-new-react-app.html) - The web framework used
+* [Node Package Manager](https://www.npmjs.com/) - Dependency Management
+* [Mocha](https://mochajs.org/) - Testing framework
 
-### Making a Progressive Web App
+## Authors
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+**Carrie Plank** 
 
-### Advanced Configuration
+Enthusiastic developer with a background in fundraising and communications. Currently building user-friendly websites, custom API integrations, and database consulting for nonprofits, startups, and small businesses.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Lessons learned
+This was my first attempt at test driven development! Mocha was easy to pick up but I found reframing my thinking towards TDD a bit more challenging. It was a great exercise to think about the tests first - what are they testing, what are the expected outcomes - and write the functions in accordance. Like many things on the first go, I didn't quite nail it (which is why there are outstanding functions in the roadmap section), but I definitely learned a lot that I'll be able to apply to future projects.

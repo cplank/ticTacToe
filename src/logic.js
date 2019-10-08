@@ -1,11 +1,11 @@
-//Making the game board. Zeroes denote an empty space.
-// let gameBoard = [
-//     [0, 0, 0],
-//     [0, 0, 0],
-//     [0, 0, 0]
-// ]
+// Making the game board.Zeroes denote an empty space.
+let gameBoard = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+]
 
-// let xPlayerTurn = true;
+let xPlayerTurn = true;
 
 export function playerMove(gameBoard, token, r, c) {
     gameBoard[r][c] = token
@@ -73,6 +73,4 @@ function communicateToUser() {
     // its not over
 }
 
-
-
-// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
+module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
