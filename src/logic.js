@@ -73,4 +73,4 @@ function communicateToUser() {
     // its not over
 }
 
-module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
+// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
