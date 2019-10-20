@@ -4,7 +4,8 @@ import { Square } from './Square'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css'
-import { playerMove } from './logic'
+import { playerMove, isValidMove, checkWin, emptyGameBoard, isCatsGame } from './logic'
+
 
 
 // let x = <img src="./images/coffeeBeans.png"></img>
@@ -25,13 +26,37 @@ class App extends Component {
       playerTurn: 'x'
     }
   }
+  // if playermove returns false, don't change playerTurn
 
   cellClicked(r, c) {
-    console.log("Yo cell clicked", this)
-    this.setState({
-      gameBoard: playerMove(this.state.gameBoard, this.state.playerTurn, r, c),
-      playerTurn: this.state.playerTurn === "x" ? "o" : "x"
-    })
+    console.log("Yo cell clicked", this);
+
+    let validMove = isValidMove(this.state.gameBoard, r, c);
+    if (validMove) {
+      this.setState({
+        gameBoard: playerMove(this.state.gameBoard, this.state.playerTurn, r, c)
+      });
+      let catsGame = isCatsGame(this.state.gameBoard);
+      let win = checkWin(this.state.gameBoard, this.state.playerTurn);
+      if (win || !catsGame) {
+        console.log("Game Over")
+        setTimeout(() => {
+          this.setState({
+            gameBoard: emptyGameBoard(),
+            playerTurn: "x"
+          })
+        }, 3000)
+      } else {
+        this.setState({
+          gameBoard: playerMove(this.state.gameBoard, this.state.playerTurn, r, c),
+          playerTurn: this.state.playerTurn === "x" ? "o" : "x"
+        })
+      }
+    } else {
+      this.setState({
+        gameBoard: this.state.gameBoard
+      })
+    }
     console.log("What state", this.state)
 
   }
@@ -49,24 +74,5 @@ class App extends Component {
     )
   }
 }
-
-// < Container style={center}>
-//   <Row>
-//     <Col style={colBorderBoth} onClick={() => { this.cellClicked(0, 0) }}>{this.state.gameBoard[0][0]}</Col>
-//     <Col style={colBorderBoth} onClick={() => { this.cellClicked(0, 1) }}>{this.state.gameBoard[0][1]}</Col>
-//     <Col style={colBorderBottomOnly} onClick={() => { this.cellClicked(0, 2) }}>{this.state.gameBoard[0][2]}</Col>
-//   </Row>
-//   <Row>
-//     <Col style={colBorderBoth} onClick={() => { this.cellClicked(1, 0) }}>{this.state.gameBoard[1][0]}</Col>
-//     <Col style={colBorderBoth} onClick={() => { this.cellClicked(1, 1) }}>{this.state.gameBoard[1][1]}</Col>
-//     <Col style={colBorderBottomOnly} onClick={() => { this.cellClicked(1, 2) }}>{this.state.gameBoard[1][2]}</Col>
-//   </Row>
-//   <Row>
-//     <Col style={colBorderRightOnly} onClick={() => { this.cellClicked(2, 0) }}>{this.state.gameBoard[2][0]}</Col>
-//     <Col style={colBorderRightOnly} onClick={() => { this.cellClicked(2, 1) }}>{this.state.gameBoard[2][1]}</Col>
-//     <Col onClick={() => { this.cellClicked(2, 2) }}>{this.state.gameBoard[2][2]}</Col>
-//   </Row>
-// </Container >
-
 
 export default App;

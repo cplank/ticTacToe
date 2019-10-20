@@ -7,10 +7,19 @@ let gameBoard = [
 
 let xPlayerTurn = true;
 
+export function emptyGameBoard() {
+    return gameBoard = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
+}
+
 export function playerMove(gameBoard, token, r, c) {
     gameBoard[r][c] = token
     console.log(gameBoard);
     return gameBoard
+
 }
 
 
@@ -42,7 +51,7 @@ function getDiagonal2(gameBoard) {
     return [gameBoard[0][2], gameBoard[1][1], gameBoard[2][0]]
 }
 
-function checkWin(gameBoard, token) {
+export function checkWin(gameBoard, token) {
     for (let i = 0; i < gameBoard.length; i++) {
         let win = checkLine(gameBoard[i], token)
         if (win) {
@@ -66,11 +75,21 @@ function checkWin(gameBoard, token) {
     return false
 }
 
-function communicateToUser() {
-    //if token x wins checkWin, show the user "X has won!"
-    //if token o wins checkwin, show the user "o has won!"
-    //cat game
-    // its not over
+export function isValidMove(gameBoard, r, c) {
+    if (gameBoard[r][c] !== 0) {
+        return false
+    } else {
+        return true
+    }
+}
+export function isCatsGame(gameBoard) {
+    for (let i = 0; i < gameBoard.length; i++) {
+        if (gameBoard[i] === 0) {
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
-// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove }
+// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove, isValidMove }
