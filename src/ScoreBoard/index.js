@@ -9,10 +9,10 @@ class ScoreBoard extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        {this.props.x}
+                        <span>Coffee: {this.props.xWin}</span>
                     </div>
                     <div className="col-md-6">
-                        {this.props.o}
+                        <span>Chocolate: {this.props.oWin}</span>
                     </div>
                 </div>
             </div>
