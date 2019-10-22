@@ -38,14 +38,14 @@ class App extends Component {
       });
       let catsGame = isCatsGame(this.state.gameBoard);
       let win = checkWin(this.state.gameBoard, this.state.playerTurn);
-      if (win || !catsGame) {
+      if (win || catsGame) {
         console.log("Game Over")
         setTimeout(() => {
           this.setState({
             gameBoard: emptyGameBoard(),
             playerTurn: "x"
           })
-        }, 3000)
+        }, 1000)
       } else {
         this.setState({
           gameBoard: playerMove(this.state.gameBoard, this.state.playerTurn, r, c),
