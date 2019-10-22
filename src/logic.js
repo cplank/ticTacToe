@@ -84,12 +84,13 @@ export function isValidMove(gameBoard, r, c) {
 }
 export function isCatsGame(gameBoard) {
     for (let i = 0; i < gameBoard.length; i++) {
-        if (gameBoard[i] === 0) {
-            return false
-        } else {
-            return true
+        for (let j = 0; j < gameBoard[i].length; j++) {
+            if (gameBoard[i][j] === 0) {
+                return false
+            }
         }
     }
+    return true
 }
 
-// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove, isValidMove }
+// module.exports = { makeColumns, getDiagonal1, getDiagonal2, checkLine, checkWin, gameBoard, playerMove, isValidMove, isCatsGame }
