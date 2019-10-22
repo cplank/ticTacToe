@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board'
-import { Square } from './Square'
+import ScoreBoard from './ScoreBoard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css'
@@ -23,7 +23,9 @@ class App extends Component {
         [0, 0, 0],
         [0, 0, 0]
       ],
-      playerTurn: 'x'
+      playerTurn: 'x',
+      x: 0,
+      o: 0
     }
   }
   // if playermove returns false, don't change playerTurn
@@ -38,8 +40,18 @@ class App extends Component {
       });
       let catsGame = isCatsGame(this.state.gameBoard);
       let win = checkWin(this.state.gameBoard, this.state.playerTurn);
-      if (win || catsGame) {
-        console.log("Game Over")
+      if (win) {
+        console.log("A player has won!")
+        let currentScore = this.state[this.state.playerTurn]
+        setTimeout(() => {
+          this.setState({
+            gameBoard: emptyGameBoard(),
+            playerTurn: "x",
+            [this.state.playerTurn]: currentScore + 1
+          })
+        }, 1000)
+      } if (catsGame) {
+        console.log("Cats Game")
         setTimeout(() => {
           this.setState({
             gameBoard: emptyGameBoard(),
@@ -67,6 +79,9 @@ class App extends Component {
       <div className="game">
         <div className="game-board">
           <Board {...this.state} cellClick={this.cellClicked} />
+        </div>
+        <div className="score-board">
+          <ScoreBoard {...this.state} />
         </div>
       </div>
 
