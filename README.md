@@ -6,15 +6,16 @@ Simple tic-tac-toe game to learn Mocha.js. This app is **in development**.
 * Game logic is complete
 * All functions pass unit testing
 * Intial UI work
+   * Coffee Beans for X and Chocolate Bars for O's (because this is an exercise to learn ***Mocha*** :laughing:
+* Function to restart game after game end
 
 ## Roadmap
-* Complete UI (chocolate bars for X's and coffee beans for O's...because this was an exercise to learn ***Mocha*** :laughing: )
 * Functions to handle communication with user
     * Player turn
     * Player victory
     * Tied game
     * Invalid move
-* Function to restart game after game end
+
 
 ## Getting Started
 
