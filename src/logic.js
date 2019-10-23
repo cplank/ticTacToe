@@ -5,7 +5,6 @@ let gameBoard = [
     [0, 0, 0]
 ]
 
-let xPlayerTurn = true;
 
 export function emptyGameBoard() {
     return gameBoard = [

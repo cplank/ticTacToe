@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board'
-import { Square } from './Square'
+import ScoreBoard from './ScoreBoard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './index.css'
@@ -8,8 +8,10 @@ import { playerMove, isValidMove, checkWin, emptyGameBoard, isCatsGame } from '.
 
 
 
-// let x = <img src="./images/coffeeBeans.png"></img>
-let x = "x"
+
+let x = <img src="images/coffeeBeans.png"></img>
+let o = <img src="images/chocolate.png"></img>
+
 
 class App extends Component {
   constructor(props) {
@@ -23,13 +25,15 @@ class App extends Component {
         [0, 0, 0],
         [0, 0, 0]
       ],
-      playerTurn: 'x'
+      playerTurn: x,
+      xWin: 0,
+      oWin: 0
     }
   }
   // if playermove returns false, don't change playerTurn
 
   cellClicked(r, c) {
-    console.log("Yo cell clicked", this);
+    console.log("WHAT IS X", this.state.playerTurn.props.src)
 
     let validMove = isValidMove(this.state.gameBoard, r, c);
     if (validMove) {
@@ -38,18 +42,37 @@ class App extends Component {
       });
       let catsGame = isCatsGame(this.state.gameBoard);
       let win = checkWin(this.state.gameBoard, this.state.playerTurn);
-      if (win || catsGame) {
-        console.log("Game Over")
+      if (win) {
+        console.log("A player has won!")
+        if (this.state.playerTurn.props.src === "images/coffeeBeans.png") {
+          setTimeout(() => {
+            this.setState({
+              gameBoard: emptyGameBoard(),
+              playerTurn: x,
+              xWin: this.state.xWin + 1
+            })
+          }, 1000)
+        } else {
+          setTimeout(() => {
+            this.setState({
+              gameBoard: emptyGameBoard(),
+              playerTurn: x,
+              oWin: this.state.oWin + 1
+            })
+          }, 1000)
+        }
+      } if (catsGame) {
+        console.log("Cats Game")
         setTimeout(() => {
           this.setState({
             gameBoard: emptyGameBoard(),
-            playerTurn: "x"
+            playerTurn: x
           })
         }, 1000)
       } else {
         this.setState({
           gameBoard: playerMove(this.state.gameBoard, this.state.playerTurn, r, c),
-          playerTurn: this.state.playerTurn === "x" ? "o" : "x"
+          playerTurn: this.state.playerTurn === x ? o : x
         })
       }
     } else {
@@ -67,6 +90,9 @@ class App extends Component {
       <div className="game">
         <div className="game-board">
           <Board {...this.state} cellClick={this.cellClicked} />
+        </div>
+        <div className="score-board">
+          <ScoreBoard {...this.state} />
         </div>
       </div>
 
