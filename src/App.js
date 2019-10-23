@@ -44,7 +44,7 @@ class App extends Component {
       let win = checkWin(this.state.gameBoard, this.state.playerTurn);
       if (win) {
         console.log("A player has won!")
-        if (this.state.playerTurn.props.src === "images/coffeeBeans.png") {
+        if (this.state.playerTurn === x) {
           setTimeout(() => {
             this.setState({
               gameBoard: emptyGameBoard(),
